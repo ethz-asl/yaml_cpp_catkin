@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(yaml_cpp_catkin)
 
 find_package(catkin_simple REQUIRED)
-catkin_simple()
+catkin_simple(ALL_DEPS_REQUIRED)
 
 include(ExternalProject)
 
@@ -12,7 +12,10 @@ ExternalProject_Add(yaml_cpp_src
   URL https://yaml-cpp.googlecode.com/files/yaml-cpp-0.5.1.tar.gz
   UPDATE_COMMAND ""
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX} -DBUILD_SHARED_LIBS=ON
+  BUILD_COMMAND ${CMAKE_COMMAND} --build ./ --target install
+  INSTALL_COMMAND ""
 )
+ExternalProject_CatkinInstall(yaml_cpp_src)
 
 cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
 add_dependencies(${PROJECT_NAME} yaml_cpp_src)
