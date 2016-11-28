@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(yaml_cpp_catkin)
 
 find_package(catkin_simple REQUIRED)
-catkin_simple()
+catkin_simple(ALL_DEPS_REQUIRED)
 
 include(ExternalProject)
 
@@ -13,7 +13,10 @@ ExternalProject_Add(yaml_cpp_src
   UPDATE_COMMAND ""
   PATCH_COMMAND patch -p0 < ${CMAKE_SOURCE_DIR}/extra_version.patch
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX} -DBUILD_SHARED_LIBS=ON
+  BUILD_COMMAND ${CMAKE_COMMAND} --build ./ --target install
+  INSTALL_COMMAND ""
 )
+ExternalProject_CatkinInstall(yaml_cpp_src)
 
 cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
 add_dependencies(${PROJECT_NAME} yaml_cpp_src)
