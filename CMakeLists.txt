@@ -6,6 +6,7 @@ catkin_simple()
 
 include(ExternalProject)
 
+# Release versions currently don't use C++11 and create more compiler warnings.
 set(YAML_CPP_TAG 11607eb5bf1258641d80f7051e7cf09e317b4746)
 
 file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
