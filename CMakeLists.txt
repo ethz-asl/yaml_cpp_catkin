@@ -18,11 +18,11 @@ ExternalProject_Add(yaml_cpp_src
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX} -DBUILD_SHARED_LIBS=ON
 )
 
-cs_add_library(${PROJECT_NAME} src/dependency_tracker.cc)
-add_dependencies(${PROJECT_NAME} yaml_cpp_src)
-target_link_libraries(${PROJECT_NAME} ${CATKIN_DEVEL_PREFIX}/lib/libyaml-cpp0.5${CMAKE_SHARED_LIBRARY_SUFFIX})
-
-cs_install()
-
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/yaml-cpp
+        DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+        FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/lib/
+        DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        FILES_MATCHING PATTERN "libyaml-cpp*")
 cs_export(INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
-  CFG_EXTRAS yaml-cpp-extras.cmake)
+          LIBRARIES yaml-cpp0.5)
