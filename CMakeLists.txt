@@ -14,6 +14,7 @@ file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include)
 ExternalProject_Add(yaml_cpp_src
   GIT_REPOSITORY  https://github.com/jbeder/yaml-cpp
   GIT_TAG ${YAML_CPP_TAG}
+  UPDATE_COMMAND ""
   PATCH_COMMAND patch -p0 < ${CMAKE_SOURCE_DIR}/extra_version.patch
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX} -DBUILD_SHARED_LIBS=ON
 )
