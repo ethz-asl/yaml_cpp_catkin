@@ -1,6 +1,6 @@
 <package>
   <name>yaml_cpp_catkin</name>
-  <version>0.5.90</version>
+  <version>0.6.2</version>
   <description>yaml_cpp_catkin</description>
   <maintainer email="slynen@ethz.ch">Simon Lynen</maintainer>
 
